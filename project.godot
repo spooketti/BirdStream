@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="birdstream"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[audio]
+
+driver/enable_input=true
+
+[display]
+
+window/size/always_on_top=true
+window/size/transparent=true
+window/size/no_focus=true
+window/per_pixel_transparency/allowed=true
+
+[dotnet]
+
+project/assembly_name="birdstream"
+
+[rendering]
+
+viewport/transparent_background=true
