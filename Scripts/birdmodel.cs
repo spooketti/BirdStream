@@ -57,6 +57,7 @@ public partial class birdmodel : Node3D
 		RenderingServer.SetDefaultClearColor(
 			new Color(0, 0, 0, 0)
 		);
+		// GetWindow().MousePassthrough = true;
 	}
 
 
@@ -74,8 +75,28 @@ public partial class birdmodel : Node3D
 		// GD.Print(rawSample);
 		moveJaw(rawSample);
 		pointAtCursor(DisplayServer.MouseGetPosition());
-		label.Text = rawSample.ToString();	
+		label.Text = rawSample.ToString();
 		debugFrame.Visible = !GetWindow().Borderless;
+		
+	}
+
+	public void toggleClickable()
+	{
+		if (!GetWindow().Borderless)
+		{
+			DisplayServer.WindowSetMousePassthrough(Array.Empty<Vector2>());
+		}
+			
+		else
+		{
+			DisplayServer.WindowSetMousePassthrough(
+			[
+				new Vector2(0, 0),
+				new Vector2(GetWindow().Size.X, 0),
+				new Vector2(GetWindow().Size.X, GetWindow().Size.Y),
+				new Vector2(0, GetWindow().Size.Y)
+			]);
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -85,7 +106,24 @@ public partial class birdmodel : Node3D
 		!key.Echo &&
 		key.Keycode == Key.F8)
 		{
-			GetWindow().Borderless = !GetWindow().Borderless;
+			if (GetWindow().Borderless)
+			{
+				GetWindow().Borderless = false;
+				DisplayServer.WindowSetFlag(
+					DisplayServer.WindowFlags.Transparent,
+					false
+				);
+				
+			}
+			else
+			{
+				GetWindow().Borderless = true;
+				DisplayServer.WindowSetFlag(
+					DisplayServer.WindowFlags.Transparent,
+					true
+				);
+			}
+			toggleClickable();
 		}
 	}
 
@@ -99,15 +137,15 @@ public partial class birdmodel : Node3D
 		// 	return;
 		// }
 
-		if(db > Convert.ToSingle(audioCutoff.Text))
+		if (db > Convert.ToSingle(audioCutoff.Text))
 		{
-			skeleton.SetBonePosePosition(boneIndex,new Vector3(db*Convert.ToSingle(motionMultiplier.Text),0,0));
+			skeleton.SetBonePosePosition(boneIndex, new Vector3(db * Convert.ToSingle(motionMultiplier.Text), 0, 0));
 		}
 		else
 		{
-			skeleton.SetBonePosePosition(boneIndex, new Vector3(0, 0, 0));	
+			skeleton.SetBonePosePosition(boneIndex, new Vector3(0, 0, 0));
 		}
-		
+
 	}
 
 	private void pointAtCursor(Vector2 mousePos)
