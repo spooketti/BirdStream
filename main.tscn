@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cbwv35dja7oaj"]
+
+[ext_resource type="PackedScene" uid="uid://dglmvros4emjp" path="res://bird.tscn" id="1_hwh76"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_mfqxj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_axhhc"]
+sky_top_color = Color(0.294971, 0.450491, 0.684896, 1)
+
+[sub_resource type="Sky" id="Sky_v338e"]
+sky_material = SubResource("ProceduralSkyMaterial_axhhc")
+
+[sub_resource type="Environment" id="Environment_qjn5i"]
+background_mode = 1
+sky = SubResource("Sky_v338e")
+ambient_light_source = 3
+tonemap_mode = 3
+tonemap_exposure = 0.6
+glow_intensity = 2.0
+
+[node name="Main" type="Node3D" unique_id=1608076037]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1280704857]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.41164, 2.49683, 1.04181)
+current = true
+fov = 90.0
+
+[node name="bird" parent="." unique_id=1411144705 instance=ExtResource("1_hwh76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="Label" type="Label" parent="bird" unique_id=1064558361]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "test"
+
+[node name="TextEdit" type="TextEdit" parent="bird" unique_id=407167972]
+offset_left = 2.0
+offset_top = 22.0
+offset_right = 78.0
+offset_bottom = 71.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1646525119]
+stream = SubResource("AudioStreamMicrophone_mfqxj")
+autoplay = true
+bus = &"birdmic"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=856319231]
+environment = SubResource("Environment_qjn5i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=397728365]
+transform = Transform3D(-0.65611, -0.330264, 0.678562, 0.217074, 0.778563, 0.588827, -0.722772, 0.533634, -0.439131, 0, 0, 0)
+light_color = Color(1, 0.978333, 0.9, 1)
+light_energy = 2.0
+shadow_enabled = true

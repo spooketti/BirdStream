@@ -1,0 +1,5 @@
+# Godot 4+ specific ignores
+.godot/
+*.exe
+*.pck
+data_birdstream_windows_x86_64

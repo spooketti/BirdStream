@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dglmvros4emjp"]
+
+[ext_resource type="PackedScene" uid="uid://bt4rr4etn58ei" path="res://birdagain.glb" id="1_ga0gv"]
+[ext_resource type="Script" path="res://Scripts/birdmodel.cs" id="2_ystsk"]
+
+[node name="birdagain" instance=ExtResource("1_ga0gv")]
+script = ExtResource("2_ystsk")
