@@ -12,16 +12,20 @@ public partial class birdmodel : Node3D
 	private int maxY;
 
 	private Godot.Label label;
-	private TextEdit textEdit;
+	private TextEdit audioCutoff;
+	private TextEdit motionMultiplier;
+	private Control debugFrame;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		debugFrame = GetNode<Control>("Control");
 		skeleton = GetNode<Skeleton3D>("Armature/Skeleton3D");
 		boneIndex = skeleton.FindBone("Bone");
 		busIndex = AudioServer.GetBusIndex("birdmic");
-		label = GetNode<Godot.Label>("Label");
-		textEdit = GetNode<TextEdit>("TextEdit");
+		label = debugFrame.GetNode<Godot.Label>("Label");
+		audioCutoff = debugFrame.GetNode<TextEdit>("AudioCutoff");
+		motionMultiplier = debugFrame.GetNode<TextEdit>("MotionMagnitude");
 		// capture = (AudioEffectCapture)AudioServer.GetBusEffect(busIndex, 0);
 		DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Transparent, true);
 		GetTree().Root.Transparent = true;
@@ -70,14 +74,8 @@ public partial class birdmodel : Node3D
 		// GD.Print(rawSample);
 		moveJaw(rawSample);
 		pointAtCursor(DisplayServer.MouseGetPosition());
-		if(GetWindow().Borderless)
-		{
-			label.Text = rawSample.ToString();			
-		}
-		else
-		{
-			label.Text = "";
-		}
+		label.Text = rawSample.ToString();	
+		debugFrame.Visible = !GetWindow().Borderless;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -101,9 +99,9 @@ public partial class birdmodel : Node3D
 		// 	return;
 		// }
 
-		if(db > Convert.ToSingle(textEdit.Text))
+		if(db > Convert.ToSingle(audioCutoff.Text))
 		{
-			skeleton.SetBonePosePosition(boneIndex,new Vector3(db*2,0,0));
+			skeleton.SetBonePosePosition(boneIndex,new Vector3(db*Convert.ToSingle(motionMultiplier.Text),0,0));
 		}
 		else
 		{

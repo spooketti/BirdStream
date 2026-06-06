@@ -28,16 +28,56 @@ fov = 90.0
 [node name="bird" parent="." unique_id=1411144705 instance=ExtResource("1_hwh76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 
-[node name="Label" type="Label" parent="bird" unique_id=1064558361]
+[node name="Control" type="Control" parent="bird" unique_id=472948540]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="bird/Control" unique_id=1064558361]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
 
-[node name="TextEdit" type="TextEdit" parent="bird" unique_id=407167972]
+[node name="Label2" type="Label" parent="bird/Control" unique_id=1235337015]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 32.0
+offset_right = 177.0
+offset_bottom = 55.0
+text = "audio cutoff"
+
+[node name="Label3" type="Label" parent="bird/Control" unique_id=684556415]
+layout_mode = 0
+offset_left = 82.0
+offset_right = 176.0
+offset_bottom = 23.0
+text = "audio value"
+
+[node name="Label4" type="Label" parent="bird/Control" unique_id=1222109368]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 84.0
+offset_right = 269.0
+offset_bottom = 107.0
+text = "beak position multiplier"
+
+[node name="AudioCutoff" type="TextEdit" parent="bird/Control" unique_id=407167972]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 22.0
 offset_right = 78.0
 offset_bottom = 71.0
+text = "1.6"
+
+[node name="MotionMagnitude" type="TextEdit" parent="bird/Control" unique_id=352955878]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 78.0
+offset_bottom = 124.0
+text = "1.6"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1646525119]
 stream = SubResource("AudioStreamMicrophone_mfqxj")
